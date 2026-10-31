@@ -1,0 +1,8 @@
+# API Monitor: captured traffic may contain auth/cookie data — never commit
+app/data/
+
+# node / editor / os noise
+node_modules/
+*.log
+.DS_Store
+Thumbs.db

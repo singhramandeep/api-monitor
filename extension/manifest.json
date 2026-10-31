@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "API Monitor Bridge",
+  "description": "Captures a webpage's network/API calls (with bodies) and streams them to the local API Monitor dashboard.",
+  "version": "1.2.0",
+  "minimum_chrome_version": "116",
+  "permissions": ["debugger", "storage", "tabs", "alarms"],
+  "host_permissions": ["http://127.0.0.1/*", "http://localhost/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html", "default_title": "API Monitor Bridge" },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

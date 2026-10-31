@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>API Monitor</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header id="topbar">
+    <div class="brand">API <span>Monitor</span></div>
+    <div class="conn">
+      <span id="conn-dot" class="dot"></span>
+      <span id="conn-label">connecting&hellip;</span>
+    </div>
+    <div class="spacer"></div>
+    <div id="mini-stats"></div>
+    <div id="spark" title="Requests over the last 60 s"></div>
+    <span id="app-version" class="ver" title="API Monitor app version"></span>
+    <button id="btn-mark" class="ghost" title="Drop a timestamped mark between the requests (annotate your debugging session)">⚑ Mark</button>
+    <button id="btn-pause" class="ghost" title="Freeze the live view — captures keep buffering in the background">Pause</button>
+    <button id="btn-clear" class="ghost">Clear</button>
+    <details id="export-menu">
+      <summary class="ghost" title="Download captures">Export ▾</summary>
+      <div class="menu-pop">
+        <a href="/api/export" download>JSON — full data</a>
+        <a href="/api/export/har" download>HAR — DevTools-compatible</a>
+        <a href="/api/export/curl" download>cURL collection (.sh)</a>
+      </div>
+    </details>
+  </header>
+
+  <section id="filters">
+    <input id="f-search" type="search" placeholder="Filter by URL, method, status&hellip;" autocomplete="off" />
+    <label class="check" title="Server-side search across request/response bodies, URLs and errors (min 2 chars)">
+      <input id="f-bodies" type="checkbox" /> in bodies
+    </label>
+    <select id="f-method">
+      <option value="">Any method</option>
+      <option>GET</option><option>POST</option><option>PUT</option>
+      <option>PATCH</option><option>DELETE</option><option>HEAD</option><option>OPTIONS</option>
+    </select>
+    <select id="f-status">
+      <option value="">Any status</option>
+      <option value="2xx">2xx success</option>
+      <option value="3xx">3xx redirect</option>
+      <option value="4xx">4xx client error</option>
+      <option value="5xx">5xx server error</option>
+      <option value="failed">Failed / blocked</option>
+    </select>
+    <select id="f-host"><option value="">Any host</option></select>
+    <select id="f-endpoint" title="Group calls by endpoint (path params are normalized to :id / :uuid / :hex)"><option value="">All endpoints</option></select>
+    <span id="ep-stats" class="ep-stats" hidden></span>
+    <label class="check" title="Hide static assets (scripts, CSS, images, fonts, page navigations); keep API-style calls">
+      <input id="f-rest" type="checkbox" /> REST only
+    </label>
+    <input id="f-min" type="number" min="0" placeholder="min ms" />
+    <button id="btn-reset" class="ghost">Reset</button>
+  </section>
+
+  <main id="layout">
+    <section class="panel" id="list-panel">
+      <div id="list"></div>
+      <div id="list-note"></div>
+    </section>
+    <aside class="panel" id="detail"></aside>
+  </main>
+
+  <section id="insights">
+    <h2>Insights</h2>
+    <div class="tiles" id="tiles"></div>
+    <div class="charts">
+      <div class="chart-box"><h3>Status distribution</h3><div id="chart-status"></div></div>
+      <div class="chart-box"><h3>Top hosts</h3><div id="chart-hosts"></div></div>
+      <div class="chart-box"><h3>Top endpoints</h3><div id="chart-endpoints"></div></div>
+      <div class="chart-box"><h3>Slowest requests</h3><div id="chart-slow"></div></div>
+      <div class="chart-box"><h3>Content types</h3><div id="chart-ct"></div></div>
+      <div class="chart-box"><h3>Requests over time (last 5 min)</h3><div id="chart-timeline"></div></div>
+    </div>
+  </section>
+
+  <div id="toast" hidden></div>
+  <script src="/app.js"></script>
+</body>
+</html>

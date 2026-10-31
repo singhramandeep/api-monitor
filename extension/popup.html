@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      width: 300px; margin: 0; padding: 12px;
+      background: #0a0e14; color: #dbe6f1;
+      font: 13px/1.45 system-ui, "Segoe UI", sans-serif;
+    }
+    h1 { font-size: 14px; margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+    h1 .sub { color: #8394a7; font-weight: 400; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; background: #5d6f82; }
+    .dot.on { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 7px 0; }
+    .row .k { color: #8394a7; font-size: 11px; }
+    .url { color: #9fb0c3; font-size: 11px; font-family: ui-monospace, Consolas, monospace;
+           white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    button {
+      width: 100%; padding: 9px 10px; border: 0; border-radius: 8px;
+      font-weight: 600; cursor: pointer; background: #16a34a; color: #fff; font-size: 13px;
+    }
+    button.stop { background: #dc2626; }
+    button:disabled { opacity: .6; cursor: wait; }
+    button.ghost { background: #16202c; color: #dbe6f1; font-weight: 500; margin-top: 8px; }
+    a.ghost {
+      display: block; text-align: center; background: #16202c; color: #7dd3fc;
+      font-weight: 500; margin-top: 8px; padding: 8px 10px; border-radius: 8px;
+      text-decoration: none; font-size: 13px;
+    }
+    .hint { color: #5d6f82; font-size: 11px; margin: 10px 0 0; line-height: 1.5; }
+    .err { color: #fca5a5; font-size: 11px; margin-top: 6px; overflow-wrap: anywhere; display: none; }
+  </style>
+</head>
+<body>
+  <h1><span id="dot" class="dot"></span> API Monitor <span id="state" class="sub"></span></h1>
+  <div class="row"><span class="url" id="tab-url">&hellip;</span></div>
+  <div class="row">
+    <span class="k">Dashboard</span>
+    <span class="url" id="srv">checking&hellip;</span>
+  </div>
+  <button id="toggle">Start capturing</button>
+  <a id="open" href="#">Open dashboard</a>
+  <div id="err" class="err"></div>
+  <p class="hint">
+    Chrome shows a &ldquo;debugging&rdquo; banner on captured tabs &mdash; that's how the extension reads
+    full request/response data. Press stop to detach. Make sure the API Monitor app is running.
+  </p>
+  <script src="popup.js"></script>
+</body>
+</html>

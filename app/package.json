@@ -1,0 +1,10 @@
+{
+  "name": "api-monitor-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone local app that ingests API calls from the API Monitor Bridge Chrome extension and serves a live dashboard.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
